@@ -10,5 +10,7 @@ test('getOutputPath returns correct path', () => {
 test('readTextFile returns file content with expected line endings', () => {
   const testFile = path.join(__dirname, 'test-data', 'sample.txt');
   const content = readTextFile(testFile);
-  expect(content).toBe('line one\nline two\nline three\n');
+  // Normalize line endings to handle Windows CRLF vs Unix LF
+  const normalizedContent = content.replace(/\r\n/g, '\n');
+  expect(normalizedContent).toBe('line one\nline two\nline three\n');
 });
